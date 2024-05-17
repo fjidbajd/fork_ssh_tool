@@ -10,7 +10,7 @@ purple='\e[1;35m'
 skyblue='\e[1;96m'
 
 # 检查是否为root下运行
-[[ $EUID -ne 0 ]] && echo -e "${red}注意: 请在root用户下运行脚本${re}" && sleep 2 && exit 1
+[[ $EUID -ne 0 ]] && echo -e "${red}注意: 请在root用户下运行脚本${re}" && sleep 1 && exit 1
 
 # 创建快捷指令
 add_alias() {
@@ -7035,7 +7035,7 @@ EOF
     echo ""
     curl -sS -O https://raw.githubusercontent.com/eooce/ssh_tool/main/ssh_tool.sh && chmod +x ssh_tool.sh
     echo -e "${green}脚本已更新到最新版本！${re}"
-    break_end
+    sleep 2
     main_menu
     ;;
 
