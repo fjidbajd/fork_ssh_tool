@@ -4545,6 +4545,7 @@ EOF
               echo "------------------------"
               echo "3. 备份当前更新源"
               echo "4. 还原初始更新源"
+              echo -e "${green}5. 软件源切换列表(推荐)${re}"
               echo "------------------------"
               echo "0. 返回上一级"
               echo "------------------------"
@@ -4611,6 +4612,11 @@ EOF
                   4)
                       restore_initial_source
                       ;;
+                  5)
+                      clear
+                      bash <(curl -sSL https://raw.githubusercontent.com/SuperManito/LinuxMirrors/main/ChangeMirrors.sh)
+                      break_end
+                      ;;                     
                   0)
                       break
                       ;;
