@@ -92,7 +92,6 @@ install_nodejs(){
         if [ $? -eq 0 ]; then
             echo -e "${green}nodejs安装成功!${re}"
             sleep 2
-            break_end
         else
             echo -e "${red}nodejs安装失败，尝试再次安装...${re}"
             install nodejs npm
