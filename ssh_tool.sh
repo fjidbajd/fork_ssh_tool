@@ -5189,7 +5189,7 @@ EOF
             clear
             # 提示输入订阅端口
             echo -e "${yellow}注意：NAT小鸡需输入指定端口范围内的端口，否则无法使用订阅功能${re}"
-            read -p $'\033[1;35m请输入节点订阅端口: \033[0m' port
+            read -p $'\033[1;35m请输入节点订阅端口[回车将使用随机端口]: \033[0m' port
             if [[ -z $port ]]; then 
                port=$(shuf -i 2000-65000 -n 1)
             else
