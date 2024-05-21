@@ -5181,15 +5181,12 @@ EOF
         8)
         clear
             # 检查系统中是否安装screen
-            if command -v screen &>/dev/null; then
-                echo -e "${green}Screen已经安装${re}"
-            else
-                # 如果系统中未安装screen，则根据对应系统安装
-                install screen
-            fi   
+            install screen
 
             # 检查系统中是否存在nodejs
-            install_nodejs       
+            install_nodejs
+            sleep 1
+            clear
             # 提示输入订阅端口
             echo -e "${yellow}注意：NAT小鸡需输入指定端口范围内的端口，否则无法使用订阅功能${re}"
             while true; do
