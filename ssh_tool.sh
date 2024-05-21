@@ -979,9 +979,10 @@ case $choice in
   5)
     clear
     install wget
-    wget --no-check-certificate -O tcpx.sh https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcpx.sh
-    chmod +x tcpx.sh
-    ./tcpx.sh
+    wget --no-check-certificate -O tcpx.sh https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcpx.sh && chmod +x tcpx.sh && ./tcpx.sh
+    rm tcpx.sh
+    sleep 1
+    main_menu
     ;;
 
   6)
@@ -7035,6 +7036,7 @@ EOF
     echo ""
     curl -sS -O https://raw.githubusercontent.com/eooce/ssh_tool/main/ssh_tool.sh && chmod +x ssh_tool.sh
     echo -e "${green}脚本已更新到最新版本！${re}"
+    sleep 1
     main_menu
     ;;
 
