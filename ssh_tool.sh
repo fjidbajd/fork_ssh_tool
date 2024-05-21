@@ -5189,24 +5189,29 @@ EOF
             clear
             # 提示输入订阅端口
             echo -e "${yellow}注意：NAT小鸡需输入指定端口范围内的端口，否则无法使用订阅功能${re}"
-            read -p $'\033[1;35m请输入节点订阅端口[回车将使用随机端口]: \033[0m' port
-            if [[ -z $port ]]; then 
-               port=$(shuf -i 2000-65000 -n 1)
-            else
-                 while true; do
+            
+            while true; do
+                read -p $'\033[1;35m请输入节点订阅端口[回车将使用随机端口]: \033[0m' port
+                # 如果端口号为空，则生成随机端口号
+                if [[ -z $port ]]; then 
+                    port=$(shuf -i 2000-65000 -n 1)
+                    break
+                else
+                    # 如果端口号不为空，则验证是否为小于65535的正整数
                     if [[ $port =~ ^[0-9]+$ ]]; then
-                        # 检查输入是否为正整数
-                        if [ "$port" -gt 0 ] 2>/dev/null; then
+                        # 检查输入是否为小于65535的正整数
+                        if [ "$port" -gt 0 ] && [ "$port" -lt 65535 ] 2>/dev/null; then
                             # 输入有效，跳出循环
                             break
                         else
-                            echo -e "${red}端口输入错误，端口应为数字且为正整数${re}"
+                            echo -e "${red}端口输入错误，端口应为小于65535的正整数${re}"
                         fi
                     else
                         echo -e "${red}端口输入错误，端口应为数字且为正整数${re}"
                     fi
-                done
-            fi
+                fi
+            done
+
             echo -e "${yellow}正在开放端口中...${re}"
                 open_port() {
                     if command -v iptables &> /dev/null; then
