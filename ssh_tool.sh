@@ -6021,6 +6021,7 @@ EOF
 
                 else
                     install_nodejs
+                    break_end
                 fi           
                 
             ;;
