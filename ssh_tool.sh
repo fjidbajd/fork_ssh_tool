@@ -5211,29 +5211,11 @@ EOF
                     fi
                 fi
             done
-
+            # 开放订阅端口
             echo -e "${yellow}正在开放端口中...${re}"
-                open_port() {
-                    if command -v iptables &> /dev/null; then
-                        iptables -A INPUT -p tcp --dport $port -j ACCEPT
-                        echo -e "${green}${port}端口已开放${re}"
-                    else
-                        echo "iptables未安装，尝试安装..."
-                        
-                        install iptables
-
-                        if [ $? -eq 0 ]; then
-                            clear
-                            echo -e "${green}iptables安装成功${re}"
-                            iptables -A INPUT -p tcp --dport $port -j ACCEPT
-                            echo -e "${green}${port}端口已开放${re}"
-                        else
-                            echo -e "${red}iptables安装失败，尝试关闭防火墙${re}"
-                            sudo systemctl stop ufw.service && sudo systemctl disable ufw.service && (sudo ufw status | grep -q 'Status: inactive' && echo "防火墙已关闭成功" || echo "防火墙已关闭失败，请手动关闭")
-                        fi
-                    fi
-                }
-                open_port
+            install iptables
+            iptables -A INPUT -p tcp --dport $port -j ACCEPT
+            echo -e "${green}${port}端口已开放${re}"
 
             ipv4=$(curl -s ipv4.ip.sb)
 
