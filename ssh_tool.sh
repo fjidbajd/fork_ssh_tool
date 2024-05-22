@@ -5216,7 +5216,7 @@ EOF
             install iptables
             iptables -A INPUT -p tcp --dport $port -j ACCEPT
             echo -e "${green}${port}端口已开放${re}"
-
+            clear
             ipv4=$(curl -s ipv4.ip.sb)
 
             echo -e "${green}你的节点订阅链接为：http://$ipv4:$port/sub${re}" 
