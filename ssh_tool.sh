@@ -5138,38 +5138,38 @@ EOF
         1)
         clear
             bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh)
-            sleep 2
+            sleep 1
             break_end
         ;;
         2)
         clear
             bash <(curl -fsSL https://github.com/vveg26/sing-box-reality-hysteria2/raw/main/beta.sh)
-            sleep 2
+            sleep 1
             break_end
         ;;
         3)
         clear
             bash <(curl -Ls https://gitlab.com/rwkgyg/sing-box-yg/raw/main/sb.sh)
-            sleep 2
+            sleep 1
             break_end
         ;;
         4)
         clear
             install wget
             wget -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" && chmod 777 install.sh && bash install.sh
-            sleep 2
+            sleep 1
             break_end
         ;;
         5)
         clear
             bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh)
-            sleep 2
+            sleep 1
             break_end
         ;;
         6)
         clear
             curl https://www.baipiao.eu.org/suoha.sh -o suoha.sh && bash suoha.sh
-            sleep 2
+            sleep 1
             break_end            
         ;;            
         7)
@@ -5267,7 +5267,7 @@ EOF
                     done
 
                     HY2_PORT=$port bash -c "$(curl -L https://raw.githubusercontent.com/eooce/scripts/master/Hysteria2.sh)"
-                    sleep 2
+                    sleep 1
                     break_end
 
                     ;;
@@ -5317,13 +5317,13 @@ EOF
         10)
         clear
             install wget && wget -N https://raw.githubusercontent.com/Misaka-blog/juicity-script/main/juicity.sh && bash juicity.sh
-            sleep 2
+            sleep 1
             break_end
         ;;   
         11)
         clear
             bash -c "$(curl -L https://raw.githubusercontent.com/eooce/scripts/master/tuic.sh)"
-            sleep 2
+            sleep 1
             break_end
         ;;      
 
@@ -5345,7 +5345,7 @@ EOF
                 echo -e "${green}当前系统内核版本 $current_kernel_version，符合安装要求${re}"
                 sleep 1
                 bash <(curl -fsSL https://github.com/vveg26/sing-box-reality-hysteria2/raw/main/tcp-brutal-reality.sh)
-                sleep 2
+                sleep 1
                 break_end
             fi
 
@@ -5354,19 +5354,19 @@ EOF
         13)
         clear
             bash <(curl -Ls https://raw.githubusercontent.com/slobys/x-ui/main/install.sh)
-            sleep 2
+            sleep 1
             break_end
         ;; 
         14)
         clear
             bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
-            sleep 2
+            sleep 1
             break_end
         ;;           
         15)
         clear
             install wget && wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
-            sleep 2
+            sleep 1
             break_end
         ;;   
 
@@ -5377,7 +5377,7 @@ EOF
             mkdir /home/mtproxy && cd /home/mtproxy
 
             curl -s -o mtproxy.sh https://raw.githubusercontent.com/sunpma/mtp/master/mtproxy.sh && chmod +x mtproxy.sh && bash mtproxy.sh
-            sleep 2
+            sleep 1
             break_end
         ;;
 
@@ -5406,7 +5406,7 @@ EOF
                     done
 
                     PORT=$port bash -c "$(curl -L https://raw.githubusercontent.com/eooce/scripts/master/reality.sh)"
-                    sleep 2
+                    sleep 1
                     break_end
 
                     ;;
