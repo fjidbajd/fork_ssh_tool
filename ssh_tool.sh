@@ -5399,16 +5399,19 @@ EOF
                     [[ -z $port ]]
                     until [[ -z $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$port") ]]; do
                         if [[ -n $(ss -tunlp | grep -w udp | awk '{print $5}' | sed 's/.*://g' | grep -w "$port") ]]; then
-                            echo -e $'\033[1;91m${PORT}端口已经被其他程序占用，请更换端口重试！\033[0m'
+                            echo -e "${red}端口已经被其他程序占用，请更换端口重试${re}"
                             read -p $'\033[1;35m设置 reality 端口[1-65535]（回车跳过将使用随机端口）：\033[0m' port
                             [[ -z $PORT ]] && port=$(shuf -i 2000-65000 -n 1)
                         fi
                     done
-
-                    PORT=$port bash -c "$(curl -L https://raw.githubusercontent.com/eooce/scripts/master/reality.sh)"
+                    system_type=$(lsb_release -si)
+                    if [ "$system_type" = "Alpine" ]; then
+                        PORT=$port bash -c "$(curl -L https://raw.githubusercontent.com/eooce/scripts/master/test.sh)"
+                    else
+                        PORT=$port bash -c "$(curl -L https://raw.githubusercontent.com/eooce/xray-reality/master/reality.sh)"
+                    fi
                     sleep 1
                     break_end
-
                     ;;
                 2)
                     sudo systemctl stop xray
