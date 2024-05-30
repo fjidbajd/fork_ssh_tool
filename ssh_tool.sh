@@ -5313,7 +5313,6 @@ EOF
                         echo -e "${green}Hysteria2端口已更换成$new_port,请手动更改客户端配置!${re}"
                         sleep 1   
                         break_end
-
                     ;;
 
                 0)
@@ -5474,7 +5473,6 @@ EOF
                         echo -e "${green}Reality端口已更换成$new_port,请手动更改客户端配置!${re}"
                         sleep 1   
                         break_end
-
                     ;;
                 0)
                     break
