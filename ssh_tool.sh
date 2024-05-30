@@ -5464,7 +5464,8 @@ EOF
                         if [ -f "/etc/alpine-release" ]; then
                             jq --argjson new_port "$new_port" '.inbounds[0].port = $new_port' /root/app/config.json > tmp.json && mv tmp.json /root/app/config.json
                             pkill -f '[w]eb'
-                            nohup ./root/app/web -c /root/app/config.json >/dev/null 2>&1 &
+                            cd app
+                            nohup ./web -c config.json >/dev/null 2>&1 &
                         else
                             clear
                             jq --argjson new_port "$new_port" '.inbounds[0].port = $new_port' /usr/local/etc/xray/config.json > tmp.json && mv tmp.json /usr/local/etc/xray/config.json
