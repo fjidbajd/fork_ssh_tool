@@ -5301,10 +5301,15 @@ EOF
                                 [[ -z $new_port ]] && new_port=$(shuf -i 2000-65000 -n 1)
                             fi
                         done
-
-                        clear
-                        sed -i "s/^listen: :[0-9]*/listen: :$new_port/" /etc/hysteria/config.yaml
-                        systemctl restart hysteria-server.service
+                        if [ -f "/etc/alpine-release" ]; then
+                            sed -i "s/^listen: :[0-9]*/listen: :$new_port/" /root/config.yaml
+                            pkill -f '[w]eb'
+                            nohup ./web server config.yaml >/dev/null 2>&1 &
+                        else
+                            clear
+                            sed -i "s/^listen: :[0-9]*/listen: :$new_port/" /etc/hysteria/config.yaml
+                            systemctl restart hysteria-server.service
+                        fi
                         echo -e "${green}Hysteria2端口已更换成$new_port,请手动更改客户端配置!${re}"
                         sleep 1   
                         break_end
@@ -5456,11 +5461,16 @@ EOF
                                 [[ -z $new_port ]] && new_port=$(shuf -i 2000-65000 -n 1)
                             fi
                         done
-
                         install jq 
-                        clear
-                        jq --argjson new_port "$new_port" '.inbounds[0].port = $new_port' /usr/local/etc/xray/config.json > tmp.json && mv tmp.json /usr/local/etc/xray/config.json
-                        systemctl restart xray.service
+                        if [ -f "/etc/alpine-release" ]; then
+                            jq --argjson new_port "$new_port" '.inbounds[0].port = $new_port' /root/app/config.json > tmp.json && mv tmp.json /root/app/config.json
+                            pkill -f '[w]eb'
+                            nohup ./root/app/web -c /root/app/config.json >/dev/null 2>&1 &
+                        else
+                            clear
+                            jq --argjson new_port "$new_port" '.inbounds[0].port = $new_port' /usr/local/etc/xray/config.json > tmp.json && mv tmp.json /usr/local/etc/xray/config.json
+                            systemctl restart xray.service
+                        fi
                         echo -e "${green}Reality端口已更换成$new_port,请手动更改客户端配置!${re}"
                         sleep 1   
                         break_end
