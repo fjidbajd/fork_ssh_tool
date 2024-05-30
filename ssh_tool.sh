@@ -5278,7 +5278,7 @@ EOF
                     if [ -f "/etc/alpine-release" ]; then
                         pkill -f '[w]eb'
                         pkill -f '[n]pm'
-                        cd && rm -rf web npm server.crt server.key
+                        cd && rm -rf web npm server.crt server.key config.yaml
                     else
                         systemctl stop hysteria-server.service
                         rm /usr/local/bin/hysteria
