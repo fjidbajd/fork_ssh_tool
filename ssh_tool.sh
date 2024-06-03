@@ -3715,7 +3715,7 @@ case $choice in
                         7) 
                             echo -e "${green}开始为你安装AlmaLinux-9${re}"
                             sleep 1
-                            bash InstallNET.sh -rockylinux
+                            bash InstallNET.sh -almaLinux
                             sleep 2
                             clear
                             read -p $'\033[1;35m是否立即重启系统继续完成安装？(y/n): \033[0m' restart_choice
