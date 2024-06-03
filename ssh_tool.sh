@@ -3469,6 +3469,7 @@ case $choice in
               echo "root:$passwd" | chpasswd && echo "Root密码设置成功" || echo "Root密码修改失败"
               sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
               sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
+              sed -i 's|^Include /etc/ssh/sshd_config.d/\*.conf|#&|' /etc/ssh/sshd_config;
               service sshd restart
               echo -e "${green}ROOT登录设置完毕，重启服务器生效${re}"
               read -p $'\033[1;35m需要立即重启服务器吗？(y/n): \033[0m' choice
