@@ -3416,30 +3416,21 @@ case $choice in
       echo "------------------------"
       echo " 1. 设置脚本启动快捷键"
       echo "------------------------"
-      echo " 2. 修改ROOT密码"
-      echo " 3. 开启ROOT密码登录模式"
-      echo " 4. 禁用修改ROOT密码"
-      echo " 5. 开放所有端口"
-      echo " 6. 修改SSH连接端口"
-      echo " 7. 优化DNS地址"
-      echo -e "${skyblue} 8. 一键重装系统${re}"
-      echo " 9. 禁用ROOT账户创建新账户"
-      echo "10. 切换优先ipv4/ipv6"
-      echo "11. 查看端口占用状态"
-      echo "12. 修改虚拟内存大小"
-      echo "13. 用户管理"
-      echo "14. 用户/密码生成器"
-      echo "15. 系统时区调整"
-      echo "16. 开启BBR3加速"
-      echo "17. 防火墙高级管理器"
-      echo "18. 修改主机名"
+      echo " 2. 修改ROOT密码                   9. 禁用ROOT账户创建新账户"
+      echo " 3. 开启ROOT密码登录              10. 切换优先ipv4/ipv6"
+      echo " 4. 禁用修改ROOT密码              11. 查看端口占用状态"
+      echo " 5. 开放所有端口                  12. 修改虚拟内存大小"
+      echo " 6. 修改SSH连接端口               13. 用户/密码生成器"
+      echo " 7. 优化DNS地址                   14. 用户管理"
+      echo -e "${skyblue} 8. 一键重装系统                  15. NAT小鸡一键重装系统${re} "
+      echo -e "${yellow}--------------------------------------------------------${re}"
+      echo "16. 开启BBR3加速                  23. 系统时区调整"
+      echo "17. 防火墙高级管理器              24. iptables一键转发"
+      echo "18. 修改主机名                    25. NAT批量SSH连接测试"
       echo "19. 切换系统更新源"
       echo "20. 定时任务管理"
       echo "21. ip开放端口扫描"
       echo "22. 服务器资源限制"
-      echo -e "23. ${skyblue}NAT小鸡一键重装系统${re}"
-      echo "24. iptables一键转发"
-      echo "25. NAT批量SSH连接测试"
       echo "------------------------"
       echo "80. 留言板"
       echo "------------------------"
@@ -3881,6 +3872,57 @@ case $choice in
             ;;
 
           13)
+            clear
+
+            echo "随机用户名"
+            echo "------------------------"
+            for i in {1..5}; do
+                username="user$(< /dev/urandom tr -dc _a-z0-9 | head -c6)"
+                echo "随机用户名 $i: $username"
+            done
+
+            echo ""
+            echo "随机姓名"
+            echo "------------------------"
+            first_names=("John" "Jane" "Michael" "Emily" "David" "Sophia" "William" "Olivia" "James" "Emma" "Ava" "Liam" "Mia" "Noah" "Isabella")
+            last_names=("Smith" "Johnson" "Brown" "Davis" "Wilson" "Miller" "Jones" "Garcia" "Martinez" "Williams" "Lee" "Gonzalez" "Rodriguez" "Hernandez")
+
+            # 生成5个随机用户姓名
+            for i in {1..5}; do
+                first_name_index=$((RANDOM % ${#first_names[@]}))
+                last_name_index=$((RANDOM % ${#last_names[@]}))
+                user_name="${first_names[$first_name_index]} ${last_names[$last_name_index]}"
+                echo "随机用户姓名 $i: $user_name"
+            done
+
+            echo ""
+            echo "随机UUID"
+            echo "------------------------"
+            for i in {1..5}; do
+                uuid=$(cat /proc/sys/kernel/random/uuid)
+                echo "随机UUID $i: $uuid"
+            done
+
+            echo ""
+            echo "16位随机密码"
+            echo "------------------------"
+            for i in {1..5}; do
+                password=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c16)
+                echo "随机密码 $i: $password"
+            done
+
+            echo ""
+            echo "32位随机密码"
+            echo "------------------------"
+            for i in {1..5}; do
+                password=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32)
+                echo "随机密码 $i: $password"
+            done
+            echo ""
+            ;;
+
+          14)
+            clear
               while true; do
                 clear
                 install sudo
@@ -3963,118 +4005,20 @@ case $choice in
               done
               ;;
 
-          14)
-            clear
-
-            echo "随机用户名"
-            echo "------------------------"
-            for i in {1..5}; do
-                username="user$(< /dev/urandom tr -dc _a-z0-9 | head -c6)"
-                echo "随机用户名 $i: $username"
-            done
-
-            echo ""
-            echo "随机姓名"
-            echo "------------------------"
-            first_names=("John" "Jane" "Michael" "Emily" "David" "Sophia" "William" "Olivia" "James" "Emma" "Ava" "Liam" "Mia" "Noah" "Isabella")
-            last_names=("Smith" "Johnson" "Brown" "Davis" "Wilson" "Miller" "Jones" "Garcia" "Martinez" "Williams" "Lee" "Gonzalez" "Rodriguez" "Hernandez")
-
-            # 生成5个随机用户姓名
-            for i in {1..5}; do
-                first_name_index=$((RANDOM % ${#first_names[@]}))
-                last_name_index=$((RANDOM % ${#last_names[@]}))
-                user_name="${first_names[$first_name_index]} ${last_names[$last_name_index]}"
-                echo "随机用户姓名 $i: $user_name"
-            done
-
-            echo ""
-            echo "随机UUID"
-            echo "------------------------"
-            for i in {1..5}; do
-                uuid=$(cat /proc/sys/kernel/random/uuid)
-                echo "随机UUID $i: $uuid"
-            done
-
-            echo ""
-            echo "16位随机密码"
-            echo "------------------------"
-            for i in {1..5}; do
-                password=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c16)
-                echo "随机密码 $i: $password"
-            done
-
-            echo ""
-            echo "32位随机密码"
-            echo "------------------------"
-            for i in {1..5}; do
-                password=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32)
-                echo "随机密码 $i: $password"
-            done
-            echo ""
-
-              ;;
-
           15)
-            while true; do
-                clear
-                echo "系统时间信息"
+            clear
+            echo -e "${green}重装系统将无法恢复数据，请提前做好备份${re}"
+            echo ""
+            read -p $'\033[1;35m确定要重装吗？(y/n): \033[0m' confirm
 
-                # 获取当前系统时区
-                current_timezone=$(timedatectl show --property=Timezone --value)
-
-                # 获取当前系统时间
-                current_time=$(date +"%Y-%m-%d %H:%M:%S")
-
-                # 显示时区和时间
-                echo "当前系统时区：$current_timezone"
-                echo "当前系统时间：$current_time"
-
-                echo ""
-                echo "时区切换"
-                echo "亚洲------------------------"
-                echo " 1. 中国上海时间              2. 中国香港时间"
-                echo " 3. 日本东京时间              4. 韩国首尔时间"
-                echo " 5. 新加坡时间                6. 印度加尔各答时间"
-                echo " 7. 阿联酋迪拜时间            8. 澳大利亚悉尼时间"
-                echo "欧洲------------------------"
-                echo "11. 英国伦敦时间             12. 法国巴黎时间"
-                echo "13. 德国柏林时间             14. 俄罗斯莫斯科时间"
-                echo "15. 荷兰尤特赖赫特时间       16. 西班牙马德里时间"
-                echo "美洲------------------------"
-                echo "21. 美国西部时间             22. 美国东部时间"
-                echo "23. 加拿大时间               24. 墨西哥时间"
-                echo "25. 巴西时间                 26. 阿根廷时间"
-                echo "------------------------"
-                echo " 0. 返回上一级选单"
-                echo "------------------------"
-                read -p $'\033[1;91m请输入你的选择: \033[0m' sub_choice
-
-                case $sub_choice in
-                    1) timedatectl set-timezone Asia/Shanghai ;;
-                    2) timedatectl set-timezone Asia/Hong_Kong ;;
-                    3) timedatectl set-timezone Asia/Tokyo ;;
-                    4) timedatectl set-timezone Asia/Seoul ;;
-                    5) timedatectl set-timezone Asia/Singapore ;;
-                    6) timedatectl set-timezone Asia/Kolkata ;;
-                    7) timedatectl set-timezone Asia/Dubai ;;
-                    8) timedatectl set-timezone Australia/Sydney ;;
-                    11) timedatectl set-timezone Europe/London ;;
-                    12) timedatectl set-timezone Europe/Paris ;;
-                    13) timedatectl set-timezone Europe/Berlin ;;
-                    14) timedatectl set-timezone Europe/Moscow ;;
-                    15) timedatectl set-timezone Europe/Amsterdam ;;
-                    16) timedatectl set-timezone Europe/Madrid ;;
-                    21) timedatectl set-timezone America/Los_Angeles ;;
-                    22) timedatectl set-timezone America/New_York ;;
-                    23) timedatectl set-timezone America/Vareouver ;;
-                    24) timedatectl set-timezone America/Mexico_City ;;
-                    25) timedatectl set-timezone America/Sao_Paulo ;;
-                    26) timedatectl set-timezone America/Argentina/Buenos_Aires ;;
-                    0) break ;; # 跳出循环，退出菜单
-                    *) break ;; # 跳出循环，退出菜单
-                esac
-            done
-              ;;
+                if [[ $confirm =~ ^[Yy]$ ]]; then
+                    sleep 1
+                    curl -so OsMutation.sh https://raw.githubusercontent.com/LloydAsp/OsMutation/main/OsMutation.sh && chmod u+x OsMutation.sh && ./OsMutation.sh
+                    break_end
+                else 
+                    main_menu
+                fi
+            ;;
 
           16)
           if dpkg -l | grep -q 'linux-xanmod'; then
@@ -4836,18 +4780,76 @@ EOF
             ;;
 
           23)
-            clear
-            echo -e "${green}重装系统将无法恢复数据，请提前做好备份${re}"
-            echo ""
-            read -p $'\033[1;35m确定要重装吗？(y/n): \033[0m' confirm
-
-                if [[ $confirm =~ ^[Yy]$ ]]; then
-                    sleep 1
-                    curl -so OsMutation.sh https://raw.githubusercontent.com/LloydAsp/OsMutation/main/OsMutation.sh && chmod u+x OsMutation.sh && ./OsMutation.sh
-                    break_end
-                else 
-                    main_menu
+            while true; do
+                clear
+                # 获取当前系统时区
+                if [ -f /etc/alpine-release ]; then
+                    if [ ! -f /etc/timezone ]; then
+                        apk add --no-cache tzdata
+                        cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+                        echo "Asia/Shanghai" > /etc/timezone
+                        current_timezone=$(cat /etc/timezone)
+                    else
+                        current_timezone=$(cat /etc/timezone)
+                    fi
+                else
+                    current_timezone=$(timedatectl show --property=Timezone --value)
                 fi
+                clear
+                echo -e "${green}系统时间信息${re}"
+                echo ""
+                # 获取当前系统时间
+                current_time=$(date +"%Y-%m-%d %H:%M:%S")
+
+                # 显示时区和时间
+                echo -e "${purple}当前系统时区：${re}${yellow}${current_timezone}${re}"
+                echo -e "${purple}当前系统时间：${re}${yellow}${current_time}${re}"
+
+                echo ""
+                echo "时区切换"
+                echo "亚洲------------------------"
+                echo " 1. 中国上海时间              2. 中国香港时间"
+                echo " 3. 日本东京时间              4. 韩国首尔时间"
+                echo " 5. 新加坡时间                6. 印度加尔各答时间"
+                echo " 7. 阿联酋迪拜时间            8. 澳大利亚悉尼时间"
+                echo "欧洲------------------------"
+                echo "11. 英国伦敦时间             12. 法国巴黎时间"
+                echo "13. 德国柏林时间             14. 俄罗斯莫斯科时间"
+                echo "15. 荷兰尤特赖赫特时间       16. 西班牙马德里时间"
+                echo "美洲------------------------"
+                echo "21. 美国西部时间             22. 美国东部时间"
+                echo "23. 加拿大时间               24. 墨西哥时间"
+                echo "25. 巴西时间                 26. 阿根廷时间"
+                echo "------------------------"
+                echo " 0. 返回上一级选单"
+                echo "------------------------"
+                read -p $'\033[1;91m请输入你的选择: \033[0m' sub_choice
+
+                case $sub_choice in
+                    1) timedatectl set-timezone Asia/Shanghai ;;
+                    2) timedatectl set-timezone Asia/Hong_Kong ;;
+                    3) timedatectl set-timezone Asia/Tokyo ;;
+                    4) timedatectl set-timezone Asia/Seoul ;;
+                    5) timedatectl set-timezone Asia/Singapore ;;
+                    6) timedatectl set-timezone Asia/Kolkata ;;
+                    7) timedatectl set-timezone Asia/Dubai ;;
+                    8) timedatectl set-timezone Australia/Sydney ;;
+                    11) timedatectl set-timezone Europe/London ;;
+                    12) timedatectl set-timezone Europe/Paris ;;
+                    13) timedatectl set-timezone Europe/Berlin ;;
+                    14) timedatectl set-timezone Europe/Moscow ;;
+                    15) timedatectl set-timezone Europe/Amsterdam ;;
+                    16) timedatectl set-timezone Europe/Madrid ;;
+                    21) timedatectl set-timezone America/Los_Angeles ;;
+                    22) timedatectl set-timezone America/New_York ;;
+                    23) timedatectl set-timezone America/Vareouver ;;
+                    24) timedatectl set-timezone America/Mexico_City ;;
+                    25) timedatectl set-timezone America/Sao_Paulo ;;
+                    26) timedatectl set-timezone America/Argentina/Buenos_Aires ;;
+                    0) break ;; # 跳出循环，退出菜单
+                    *) break ;; # 跳出循环，退出菜单
+                esac
+            done
             ;;
 
           24)
