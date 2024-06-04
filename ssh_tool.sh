@@ -2334,7 +2334,7 @@ case $choice in
       echo "17. AdGuardHome去广告软件                18. onlyoffice在线办公OFFICE"
       echo "19. 雷池WAF防火墙面板                    20. portainer容器管理面板"
       echo "21. VScode网页版                         22. UptimeKuma监控工具"
-      echo "23. Memos网页备忘录                      24. pandoranext潘多拉GPT镜像站"
+      echo "23. Memos网页备忘录                      "
       echo "------------------------"
       echo -e "${skyblue} 0. 返回主菜单${re}"
       echo "------------------------"
@@ -2589,9 +2589,7 @@ case $choice in
                   esac
                 fi
             fi
-
-
-              ;;
+            ;;
           4)
 
             docker_name="npm"
@@ -3273,130 +3271,9 @@ case $choice in
               ;;
 
           24)
-
-            docker_name="PandoraNext"
-            docker_img="pengzhile/pandora-next"
-            docker_port=8181
-            docker_rum="docker run -d --restart always --name PandoraNext \
-                            -p 8181:8181 \
-                            -v /home/docker/PandoraNext/data:/data \
-                            -v /home/docker/PandoraNext/sessions:/root/.cache/PandoraNext \
-                            pengzhile/pandora-next"
-            docker_describe="pandora-next一个好用的GPT镜像站服务，国内也可以访问"
-            docker_url="官网介绍: https://github.com/pandora-next/deploy"
-
-
-            if docker inspect "$docker_name" &>/dev/null; then
-                clear
-                echo "$docker_name 已安装，访问地址: "
-                ip_address
-                echo "http:$ipv4_address:$docker_port"
-                echo ""
-                echo "应用操作"
-                echo "------------------------"
-                echo "1. 更新应用             2. 卸载应用"
-                echo "3. 修改config           4. 修改tokens"
-                echo "------------------------"
-                echo "0. 返回上一级选单"
-                echo "------------------------"
-                read -p $'\033[1;91m请输入你的选择: \033[0m' sub_choice
-
-                case $sub_choice in
-                    1)
-                        clear
-                        docker rm -f "$docker_name"
-                        docker rmi -f "$docker_img"
-                        # 安装 Docker（请确保有 install_docker 函数）
-                        install_docker
-                        $docker_rum
-                        clear
-                        echo "$docker_name 已经安装完成"
-                        echo "------------------------"
-                        # 获取外部 IP 地址
-                        ip_address
-                        echo "您可以使用以下地址访问:"
-                        echo "http:$ipv4_address:$docker_port"
-
-                        ;;
-                    2)
-                        clear
-                        docker rm -f "$docker_name"
-                        docker rmi -f "$docker_img"
-                        rm -rf "/home/docker/$docker_name"
-                        echo "应用已卸载"
-                        ;;
-                    3)
-                        clear
-                        nano /home/docker/PandoraNext/data/config.json
-                        echo "正在重启$docker_name"
-                        docker restart "$docker_name"
-
-                        ;;
-                    4)
-                        clear
-                        nano /home/docker/PandoraNext/data/tokens.json
-                        echo "正在重启$docker_name"
-                        docker restart "$docker_name"
-
-                        ;;
-                    0)
-                        # 跳出循环，退出菜单
-                        ;;
-                    *)
-                        # 跳出循环，退出菜单
-                        ;;
-                esac
-            else
-                clear
-                echo "安装提示"
-                echo "$docker_describe"
-                echo "$docker_url"
-                echo ""
-
-                # 提示用户确认安装
-                read -p "确定安装吗？(Y/N): " choice
-                case "$choice" in
-                    [Yy])
-                        clear
-                        echo "获取license_id请访问: https://dash.pandoranext.com/"
-                        read -p "请输入你的GitHub的license_id: " github1
-
-                        install_docker
-
-                        mkdir -p /home/docker/PandoraNext/{data,sessions}
-                        cd /home/docker/PandoraNext/data
-                        wget https://raw.githubusercontent.com/kejilion/sh/main/PandoraNext/config.json
-                        wget https://raw.githubusercontent.com/kejilion/sh/main/PandoraNext/tokens.json
-                        sed -i "s/github/$github1/g" /home/docker/PandoraNext/data/config.json
-                        webgptpasswd1=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c16)
-                        sed -i "s/webgptpasswd/$webgptpasswd1/g" /home/docker/PandoraNext/data/config.json
-
-                        $docker_rum
-                        clear
-                        echo "$docker_name 已经安装完成"
-                        echo "------------------------"
-                        # 获取外部 IP 地址
-                        ip_address
-                        echo "您可以使用以下地址访问:"
-                        echo "http:$ipv4_address:$docker_port"
-
-                        ;;
-                    [Nn])
-                        # 用户选择不安装
-                        ;;
-                    *)
-                        # 无效输入
-                        ;;
-                esac
-            fi
-
-
-
-
-
-
-              ;;
-
+            clear 
+                echo "${red}项目已失效${re}"
+            ;;
           0)
               main_menu
               ;;
