@@ -3584,6 +3584,19 @@ case $choice in
 
           8)
             clear
+
+            restart_system() {
+                read -p $'\033[1;35m是否立即重启系统继续完成安装？(y/n): \033[0m' restart_choice
+                echo -e "${green}重启系统几分钟后即可连接SSH${re}"
+                if [[ $restart_choice =~ ^[Yy]$ ]]; then
+                    reboot
+                else 
+                    echo -e "${green}请手动重启系统继续完成安装${re}"
+                    sleep 2
+                    main_menu
+                fi
+            }
+
             echo -e "${purple}重装系统将无法恢复数据，请提前做好备份${re}"
             echo ""
             read -p $'\033[1;35m确定要重装吗？(y/n): \033[0m' confirm
@@ -3601,169 +3614,135 @@ case $choice in
                     echo -e "${yellow}Windows默认用户名：${purple}Administrator${yellow} 默认密码：${purple}Teddysun.com${yellow} 默认远程连接端口${purple}3389${re}"
                     echo -e "${yellow}详细参数参考Github项目地址：https://github.com/leitbogioro/Tools${re}"
                     echo ""
-                    echo -e "${green}1.安装Debian-12${re}"
-                    echo -e "${green}2.安装Ubuntu-22.04${re}"
-                    echo -e "${green}3.安装Alpine-Linux${re}"
-                    echo -e "${green}4.安装CentOS-9${re}"
-                    echo -e "${green}5.安装Fedora-39${re}"
-                    echo -e "${green}6.安装RockyLinux-9${re}"
-                    echo -e "${green}7.安装AlmaLinux-9${re}"
-                    echo -e "${green}8.安装Kali-Rolling${re}"
-                    echo -e "${green}9.安装Windows-11-Pro${re}"
-                    echo "---------------------"
+                    echo -e "${green} 1.安装Debian-11            2.安装Debian-12${re}"
+                    echo -e "${green} 3.安装Ubuntu-22.04         4.安装Ubuntu-24.04${re}"
+                    echo -e "${green} 5.安装Alpine-3.19          6.安装Alpine-3.20${re}"
+                    echo -e "${green} 7.安装Centos-8             8.安装Centos-9${re}"
+                    echo -e "${green} 9.安装Fedora-39           10.安装RockyLinux-9${re}"
+                    echo -e "${green}11.安装AlmaLinux-9         12.安装Kali-Rolling${re}"
+                    echo -e "${green}13.安装Windows-10          14.安装Windows-11${re}"
+                    echo "-----------------------------------------------"
                     echo -e "${red}0.取消安装${re}"
-                    echo "------------------------"
+                    echo "---------------------"
                     read -p $'\033[1;35m请输入你的选择: \033[0m' sub_choice
                    
                     case $sub_choice in
                         1) 
-                            echo -e "${green}开始为你安装Debian-12${re}"
+                            echo -e "${green}开始为你安装Debian-11${re}"
                             sleep 1
-                            bash InstallNET.sh -debian
+                            bash InstallNET.sh -debian 11
                             sleep 2
                             clear
-                            read -p $'\033[1;35m是否立即重启系统继续完成安装？(y/n): \033[0m' restart_choice
-                            echo -e "${green}重启系统几分钟后即可连接SSH${re}"
-                            if [[ $restart_choice =~ ^[Yy]$ ]]; then
-                                reboot
-                            else 
-                                echo -e "${green}请手动重启系统继续完成安装${re}"
-                                sleep 2
-                                main_menu
-                            fi
+                            restart_system
                             ;;
                         2) 
-                            echo -e "${green}开始为你安装Ubuntu-22.04${re}"
+                            echo -e "${green}开始为你安装Debian-12${re}"
                             sleep 1
-                            bash InstallNET.sh -ubuntu
+                            bash InstallNET.sh -debian 12
                             sleep 2
                             clear
-                            read -p $'\033[1;35m是否立即重启系统继续完成安装？(y/n): \033[0m' restart_choice
-                            echo -e "${green}重启系统几分钟后即可连接SSH${re}"
-                            if [[ $restart_choice =~ ^[Yy]$ ]]; then
-                                reboot
-                            else 
-                                echo -e "${green}请手动重启系统继续完成安装${re}"
-                                sleep 2
-                                main_menu
-                            fi
+                            restart_system
                             ;;
                         3) 
-                            echo -e "${green}开始为你安装Alpine-Linux${re}"
+                            echo -e "${green}开始为你安装Ubuntu-22.04${re}"
+                            sleep 1
+                            bash InstallNET.sh -ubuntu 22.04
+                            sleep 2
+                            clear
+                            restart_system
+                            ;;
+                        4) 
+                            echo -e "${green}开始为你安装Ubuntu-24.04${re}"
+                            sleep 1
+                            bash InstallNET.sh -ubuntu 24.04
+                            sleep 2
+                            clear
+                            restart_system
+                            ;;
+                        5) 
+                            echo -e "${green}开始为你安装Alpine-3.19${re}"
+                            sleep 1
+                            bash InstallNET.sh -alpine 3.19
+                            sleep 2
+                            clear
+                            restart_system
+                            ;;
+                        6) 
+                            echo -e "${green}开始为你安装Alpine-3.20${re}"
                             sleep 1
                             bash InstallNET.sh -alpine
                             sleep 2
                             clear
-                            read -p $'\033[1;35m是否立即重启系统继续完成安装？(y/n): \033[0m' restart_choice
-                            echo -e "${green}重启系统几分钟后即可连接SSH${re}"
-                            if [[ $restart_choice =~ ^[Yy]$ ]]; then
-                                reboot
-                            else 
-                                echo -e "${green}请手动重启系统继续完成安装${re}"
-                                sleep 2
-                                main_menu
-                            fi
+                            restart_system
                             ;;
-                        4) 
-                            echo -e "${green}开始为你安装CentOS-9${re}"
+                        7) 
+                            echo -e "${green}开始为你安装Centos-8${re}"
                             sleep 1
-                            bash InstallNET.sh -centos
+                            bash InstallNET.sh -centos 8
                             sleep 2
                             clear
-                            read -p $'\033[1;35m是否立即重启系统继续完成安装？(y/n): \033[0m' restart_choice
-                            echo -e "${green}重启系统几分钟后即可连接SSH${re}"
-                            if [[ $restart_choice =~ ^[Yy]$ ]]; then
-                                reboot
-                            else 
-                                echo -e "${green}请手动重启系统继续完成安装${re}"
-                                sleep 2
-                                main_menu
-                            fi
+                            restart_system
                             ;;
-                        5) 
+                        8) 
+                            echo -e "${green}开始为你安装Centos-9${re}"
+                            sleep 1
+                            bash InstallNET.sh -centos 9
+                            sleep 2
+                            clear
+                            restart_system
+                            ;;
+                        9) 
                             echo -e "${green}开始为你安装Fedora-39${re}"
                             sleep 1
                             bash InstallNET.sh -fedora
                             sleep 2
                             clear
-                            read -p $'\033[1;35m是否立即重启系统继续完成安装？(y/n): \033[0m' restart_choice
-                            echo -e "${green}重启系统几分钟后即可连接SSH${re}"
-                            if [[ $restart_choice =~ ^[Yy]$ ]]; then
-                                reboot
-                            else 
-                                echo -e "${green}请手动重启系统继续完成安装${re}"
-                                sleep 2
-                                main_menu
-                            fi
+                            restart_system
                             ;;
-                        6) 
+                        10) 
                             echo -e "${green}开始为你安装RockyLinux-9${re}"
                             sleep 1
                             bash InstallNET.sh -rockylinux
                             sleep 2
                             clear
-                            read -p $'\033[1;35m是否立即重启系统继续完成安装？(y/n): \033[0m' restart_choice
-                            echo -e "${green}重启系统几分钟后即可连接SSH${re}"
-                            if [[ $restart_choice =~ ^[Yy]$ ]]; then
-                                reboot
-                            else 
-                                echo -e "${green}请手动重启系统继续完成安装${re}"
-                                sleep 2
-                                main_menu
-                            fi
+                            restart_system
                             ;;
-                        7) 
+                        11) 
                             echo -e "${green}开始为你安装AlmaLinux-9${re}"
                             sleep 1
                             bash InstallNET.sh -almaLinux
                             sleep 2
                             clear
-                            read -p $'\033[1;35m是否立即重启系统继续完成安装？(y/n): \033[0m' restart_choice
-                            echo -e "${green}重启系统几分钟后即可连接SSH${re}"
-                            if [[ $restart_choice =~ ^[Yy]$ ]]; then
-                                reboot
-                            else 
-                                echo -e "${green}请手动重启系统继续完成安装${re}"
-                                sleep 2
-                                main_menu
-                            fi
+                            restart_system
                             ;;
-                        8) 
+                        12) 
                             echo -e "${green}开始为你安装Kali-Rolling${re}"
                             sleep 1
                             bash InstallNET.sh -kali
                             sleep 2
                             clear
-                            read -p $'\033[1;35m是否立即重启系统继续完成安装？(y/n): \033[0m' restart_choice
-                            echo -e "${green}重启系统几分钟后即可连接SSH${re}"
-                            if [[ $restart_choice =~ ^[Yy]$ ]]; then
-                                reboot
-                            else 
-                                echo -e "${green}请手动重启系统继续完成安装${re}"
-                                sleep 2
-                                main_menu
-                            fi
+                            restart_system
                             ;;
-                        9) 
-                            echo -e "${green}开始为你安装Windows-11-Pro${re}"
+                        13) 
+                            echo -e "${green}开始为你安装Windows-10${re}"
                             sleep 1
-                            bash InstallNET.sh -windows
+                            bash InstallNET.sh -windows 10 -lang "cn"
                             sleep 2
                             clear
-                            read -p $'\033[1;35m是否立即重启系统继续完成安装？(y/n): \033[0m' restart_choice
-                            echo -e "${green}重启系统几分钟后即可连接远程桌面${re}"
-                            if [[ $restart_choice =~ ^[Yy]$ ]]; then
-                                reboot
-                            else 
-                                echo -e "${green}请手动重启系统继续完成安装${re}"
-                                sleep 2
-                                main_menu
-                            fi
+                            restart_system
+                            ;;
+                        14) 
+                            echo -e "${green}开始为你安装Windows-11${re}"
+                            sleep 1
+                            bash InstallNET.sh -windows 11 -lang "cn"
+                            sleep 2
+                            clear
+                            restart_system
                             ;;
                         0) 
                             echo -e "${red}正在退出安装...${re}"
                             rm InstallNET.sh
-                            sleep 2
+                            sleep 1
                             main_menu
                             ;;
                         *)
@@ -7043,7 +7022,7 @@ EOF
         esac
     done
     ;; 
-# 脚本更新
+
   00)
     cd ~
     curl -sS -O https://raw.githubusercontent.com/eooce/ssh_tool/main/update_log.sh && chmod +x update_log.sh && ./update_log.sh
