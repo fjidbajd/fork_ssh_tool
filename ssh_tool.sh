@@ -5471,14 +5471,10 @@ EOF
               ;;
           10)
               clear
-              new_swap=1024
-              add_swap
               curl -sL yabs.sh | bash -s -- -i -5
               ;;
           11)
               clear
-              new_swap=1024
-              add_swap
               bash <(curl -sL bash.icu/gb5)
               ;;
           12)
