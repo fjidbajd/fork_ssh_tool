@@ -4976,7 +4976,7 @@ EOF
       echo -e "${green}       Sing-box多合一             Argo-tunnel${re}"
       echo -e "${green}---------------------------------------------------------${re}"
       echo -e "${white} 1. F佬Sing-box一键脚本        5. F佬ArgoX一键脚本${re}"
-      echo -e "${white} 2. 小绵羊Sing-box三合一       6. Suoha一键Argo脚本${re}"
+      echo -e "${white} 2. 老王Sing-box四合一        6. Suoha一键Argo脚本${re}"
       echo -e "${white} 3. 勇哥Sing-box四合一         7. WL一键Argo哪吒脚本${re}"
       echo -e "${white} 4. V2ray-agent八合一          8. 老王nodejs-argo节点+哪吒+订阅"
       echo -e "${yellow}---------------------------------------------------------${re}"
@@ -5002,7 +5002,7 @@ EOF
         ;;
         2)
         clear
-            bash <(curl -fsSL https://github.com/vveg26/sing-box-reality-hysteria2/raw/main/beta.sh)
+            bash <(curl -Ls https://raw.githubusercontent.com/eooce/scripts/master/sing-box.sh)
             sleep 1
             break_end
         ;;
