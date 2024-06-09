@@ -5242,11 +5242,8 @@ EOF
 
         16)
         clear
-            
-            echo "自動創建TG代理目錄：/home/mtproxy"
-            mkdir /home/mtproxy && cd /home/mtproxy
-
-            curl -s -o mtproxy.sh https://raw.githubusercontent.com/sunpma/mtp/master/mtproxy.sh && chmod +x mtproxy.sh && bash mtproxy.sh
+            rm -rf /home/mtproxy && mkdir /home/mtproxy && cd /home/mtproxy
+            curl -fsSL -o mtproxy.sh https://github.com/ellermister/mtproxy/raw/master/mtproxy.sh && chmod +x mtproxy.sh && bash mtproxy.sh
             sleep 1
             break_end
         ;;
