@@ -20,7 +20,7 @@ add_alias() {
     for alias_name in "${alias_names[@]}"; do
         if ! grep -q "alias $alias_name=" "$config_file"; then 
             echo "Adding alias $alias_name to $config_file"
-            echo "alias $alias_name='cd ~ && ./ssh_tool.sh'" >> "$config_file"
+            echo "alias $alias_name='curl -fsSL https://raw.githubusercontent.com/eooce/ssh_tool/main/ssh_tool.sh && chmod +x ssh_tool.sh && ./ssh_tool.sh'" >> "$config_file"
         fi
     done
     . "$config_file"
