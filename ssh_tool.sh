@@ -5002,7 +5002,7 @@ EOF
         ;;
         2)
         clear
-            bash <(curl -Ls https://raw.githubusercontent.com/eooce/scripts/master/sing-box.sh)
+            bash <(curl -Ls https://raw.githubusercontent.com/eooce/sing-box/main/sing-box.sh)
             sleep 1
             break_end
         ;;
