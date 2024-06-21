@@ -4983,7 +4983,7 @@ EOF
       echo -e "${yellow}        单协议                    XRAY面板及其他${re}"
       echo -e "${yellow}---------------------------------------------------------${re}"
       echo -e "${white} 9. 老王Hysteria2一键脚本     13.新版X-UI面板一键脚本${re}"
-      echo -e "${white}10. M佬Juicity一键脚本        14.伊朗版3X-UI面板一键脚本${re}"
+      echo -e "${white}10. 老王Juicity一键脚本        14.伊朗版3X-UI面板一键脚本${re}"
       echo -e "${white}11. 老王Tuic-v5一键脚本       15.OpenVPN一键安装脚本 ${re}"
       echo -e "${white}12. Brutal-Reality一键脚本    16.一键搭建TG代理 ${re}"
       echo -e "${white}17. 老王Reality一键脚本       18.sing-box面板(sui) ▶${re}"
@@ -5186,7 +5186,7 @@ EOF
         ;;     
         10)
         clear
-            install wget && wget -N https://raw.githubusercontent.com/Misaka-blog/juicity-script/main/juicity.sh && bash juicity.sh
+            bash <(curl -Ls https://raw.githubusercontent.com/eooce/scripts/master/juicity.sh)
             sleep 1
             break_end
         ;;   
