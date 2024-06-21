@@ -6945,3 +6945,5 @@ EOF
 esac
     break_end
 done
+
+trap 'echo "已退出脚本"; exit' INT
