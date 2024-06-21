@@ -537,8 +537,6 @@ echo -e "${green}00. 脚本更新${red}                  88. 退出脚本${re}"
 echo -e "${yellow}-------------------------------------------------------------------${re}"
 read -p $'\033[1;91m请输入你的选择: \033[0m' choice
 
-trap 'echo "已退出脚本"; exit' INT
-
 case $choice in
   1)
     clear
