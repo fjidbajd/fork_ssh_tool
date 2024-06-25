@@ -4997,44 +4997,37 @@ EOF
         1)
         clear
             bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/sing-box/main/sing-box.sh)
-            sleep 1
             break_end
         ;;
         2)
         clear
             bash <(curl -Ls https://raw.githubusercontent.com/eooce/sing-box/main/sing-box.sh)
-            sleep 1
             break_end
         ;;
         3)
         clear
             bash <(curl -Ls https://gitlab.com/rwkgyg/sing-box-yg/raw/main/sb.sh)
-            sleep 1
             break_end
         ;;
         4)
         clear
             install wget
             wget -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" && chmod 777 install.sh && bash install.sh
-            sleep 1
             break_end
         ;;
         5)
         clear
             bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh)
-            sleep 1
             break_end
         ;;
         6)
         clear
             curl https://www.baipiao.eu.org/suoha.sh -o suoha.sh && bash suoha.sh
-            sleep 1
             break_end            
         ;;            
         7)
         clear
             bash <(curl -sL https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/install.sh)
-            sleep 1
             break_end            
         ;; 
         8)
@@ -5187,13 +5180,11 @@ EOF
         10)
         clear
             bash <(curl -Ls https://raw.githubusercontent.com/eooce/scripts/master/juicity.sh)
-            sleep 1
             break_end
         ;;   
         11)
         clear
             bash -c "$(curl -L https://raw.githubusercontent.com/eooce/scripts/master/tuic.sh)"
-            sleep 1
             break_end
         ;;      
 
@@ -5224,19 +5215,16 @@ EOF
         13)
         clear
             bash <(curl -Ls https://raw.githubusercontent.com/slobys/x-ui/main/install.sh)
-            sleep 1
             break_end
         ;; 
         14)
         clear
             bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
-            sleep 1
             break_end
         ;;           
         15)
         clear
             install wget && wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
-            sleep 1
             break_end
         ;;   
 
