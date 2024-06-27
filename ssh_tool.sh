@@ -4978,7 +4978,7 @@ EOF
       echo -e "${white} 1. F佬Sing-box一键脚本        5. F佬ArgoX一键脚本${re}"
       echo -e "${white} 2. 老王Sing-box四合一         6. Suoha一键Argo脚本${re}"
       echo -e "${white} 3. 勇哥Sing-box四合一         7. WL一键Argo哪吒脚本${re}"
-      echo -e "${white} 4. V2ray-agent八合一          8. 老王nodejs-argo节点+哪吒+订阅"
+      echo -e "${white} 4. 233boy.sing-box一键脚本    8. 老王nodejs-argo节点+哪吒+订阅"
       echo -e "${yellow}---------------------------------------------------------${re}"
       echo -e "${yellow}        单协议                    XRAY面板及其他${re}"
       echo -e "${yellow}---------------------------------------------------------${re}"
@@ -5012,7 +5012,7 @@ EOF
         4)
         clear
             install wget
-            wget -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" && chmod 777 install.sh && bash install.sh
+            bash <(wget -qO- -o- https://github.com/233boy/sing-box/raw/main/install.sh)
             break_end
         ;;
         5)
