@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export LANG=en_US.UTF-8
 # 定义颜色
 re='\e[0m'
 red='\e[1;91m'
@@ -6845,6 +6845,7 @@ EOF
 
                         if [[ "$confirm" =~ ^[Yy]$ ]]; then   
                             echo -e "${green}输入配置后将进入后台为你新增incus小鸡，可关闭SSH，完成后cat log查看信息${re}"
+                            install screen
                             curl -L https://github.com/oneclickvirt/incus/raw/main/scripts/add_more.sh -o add_more.sh && chmod +x add_more.sh && screen bash add_more.sh
                             cat log
                         else 
