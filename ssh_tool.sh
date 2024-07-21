@@ -6384,6 +6384,7 @@ EOF
                                     1)
                                         echo -e "${green}开始运行普通版本批量生成小鸡${yellow}(1核256MB内存1GB硬盘限速300Mbit)${re}"
                                         sleep 1
+                                        install screen wget sudo dos2unix jq
                                         curl -L https://raw.githubusercontent.com/oneclickvirt/lxd/main/scripts/init.sh -o init.sh && chmod +x init.sh && dos2unix init.sh
                                         
                                         read -p $'\033[1;35m请输入你要生成小鸡的数量：\033[0m' number
@@ -6399,7 +6400,7 @@ EOF
                                     2)
                                         echo -e "${green}开始运行自定义批量生成小鸡(自定义配置)${re}"
                                         sleep 1
-                                        install screen
+                                        install screen wget sudo dos2unix jq
                                         echo -e "${green}输入配置后，自动进入后台生成小鸡(可直接关闭SSH连接，完成后运行cat log查看小鸡信息)${re}"
                                         sleep 3
                                         curl -L https://github.com/oneclickvirt/lxd/raw/main/scripts/add_more.sh -o add_more.sh && chmod +x add_more.sh && screen bash add_more.sh
@@ -6543,6 +6544,7 @@ EOF
 
                         if [[ "$confirm" =~ ^[Yy]$ ]]; then   
                             echo -e "${green}输入配置后将进入后台为你新增，可关闭SSH，完成后cat log查看信息${re}"
+                            install screen wget sudo dos2unix jq
                             curl -L https://github.com/oneclickvirt/lxd/raw/main/scripts/add_more.sh -o add_more.sh && chmod +x add_more.sh && screen bash add_more.sh
 
                         else 
@@ -6711,7 +6713,7 @@ EOF
                                     2)
                                         echo -e "${green}开始运行自定义批量生成小鸡${re}"
                                         sleep 1
-                                        install screen
+                                        install screen wget sudo dos2unix jq
                                         echo -e "${green}正在后台自动为你开设小鸡中，可关闭SSH，完成后运行cat log查看小鸡信息${re}"
                                         sleep 3
                                         curl -L https://github.com/oneclickvirt/incus/raw/main/scripts/add_more.sh -o add_more.sh && chmod +x add_more.sh && screen bash add_more.sh
@@ -6845,7 +6847,7 @@ EOF
 
                         if [[ "$confirm" =~ ^[Yy]$ ]]; then   
                             echo -e "${green}输入配置后将进入后台为你新增incus小鸡，可关闭SSH，完成后cat log查看信息${re}"
-                            install screen
+                            install screen curl wget sudo dos2unix jq
                             curl -L https://github.com/oneclickvirt/incus/raw/main/scripts/add_more.sh -o add_more.sh && chmod +x add_more.sh && screen bash add_more.sh
                             cat log
                         else 
