@@ -6713,7 +6713,7 @@ EOF
                                     2)
                                         echo -e "${green}开始运行自定义批量生成小鸡${re}"
                                         sleep 1
-                                        install screen wget sudo dos2unix jq
+                                        install screen curl wget sudo dos2unix jq > /dev/null 2>&1
                                         echo -e "${green}正在后台自动为你开设小鸡中，可关闭SSH，完成后运行cat log查看小鸡信息${re}"
                                         sleep 3
                                         curl -L https://github.com/oneclickvirt/incus/raw/main/scripts/add_more.sh -o add_more.sh && chmod +x add_more.sh && screen bash add_more.sh
@@ -6847,7 +6847,7 @@ EOF
 
                         if [[ "$confirm" =~ ^[Yy]$ ]]; then   
                             echo -e "${green}输入配置后将进入后台为你新增incus小鸡，可关闭SSH，完成后cat log查看信息${re}"
-                            install screen curl wget sudo dos2unix jq
+                            install screen curl wget sudo dos2unix jq > /dev/null 2>&1
                             curl -L https://github.com/oneclickvirt/incus/raw/main/scripts/add_more.sh -o add_more.sh && chmod +x add_more.sh && screen bash add_more.sh
                             cat log
                         else 
