@@ -5486,16 +5486,13 @@ EOF
       clear
       echo -e "${green}▶ 甲骨文云脚本合集${re}"
       echo "------------------------"
-      echo -e "${green}1. 安装闲置机器活跃${yellow}[Docker版]${re}"
-      echo -e "${green}2. 卸载闲置机器活跃${re}"
+      echo -e "${green}1. 一键闲置机器活跃${re}"
+      echo -e "${green}2. 开启ROOT密码登录${re}"
       echo "------------------------"
       echo -e "${purple}3. 一键DD重装系统${re}"
       echo "------------------------"
-      echo -e "${green}4. 一键R探长刷机${re}"
+      echo -e "${green}4. 安装R探长刷机${re}"
       echo -e "${red}5. 卸载R探长刷机${re}"
-      echo "------------------------"
-      echo -e "${green}6. 开启ROOT密码登录模式${re}"
-      echo -e "${green}7. 一键锻炼${re}"
       echo "------------------------"
       echo -e "${skyblue}0. 返回主菜单${re}"
       echo "------------------------"
@@ -5503,36 +5500,18 @@ EOF
 
       case $sub_choice in
           1)
-              clear
-              echo "活跃脚本: CPU占用10-20% 内存占用15% "
-              read -p "确定安装吗？(Y/N): " choice
-              case "$choice" in
-                [Yy])
-
-                  install_docker
-
-                  docker run -itd --name=lookbusy --restart=always \
-                          -e TZ=Asia/Shanghai \
-                          -e CPU_UTIL=10-20 \
-                          -e CPU_CORE=1 \
-                          -e MEM_UTIL=15 \
-                          -e SPEEDTEST_INTERVAL=120 \
-                          fogforest/lookbusy
-                  ;;
-                [Nn])
-
-                  ;;
-                *)
-                  echo "无效的选择，请输入 Y 或 N。"
-                  ;;
-              esac
-              ;;
+             clear
+              curl -L https://gitlab.com/spiritysdx/Oracle-server-keep-alive-script/-/raw/main/oalive.sh -o oalive.sh && chmod +x oalive.sh && bash oalive.sh
+            ;; 
           2)
               clear
-              docker rm -f lookbusy
-              docker rmi fogforest/lookbusy
-              ;;
-
+              read -p $'\033[1;33m请设置你的root密码: \033[0m' pswd
+              echo "root:$pswd" | chpasswd
+              sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
+              sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
+              service sshd restart
+              echo -e "${green}root登录设置完毕，请断开连接使用root+密码登录${re}"
+            ;;  
           3)
           clear
           echo "请备份数据，将为你重装系统，预计花费15分钟。"
@@ -5687,33 +5666,6 @@ EOF
               echo -e "${green}卸载完毕...${re}"
               break_end
               ;;
-
-          6)
-              clear
-              read -p $'\033[1;33m请设置ROOT密码: \033[0m' pswd
-              echo "root:$pswd" | chpasswd
-              sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
-              sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
-              service sshd restart
-              echo "ROOT登录设置完毕！"
-              read -p $'\033[1;33m需要重启服务器吗？(y/n): \033[0m' choice
-          case "$choice" in
-            [Yy])
-              reboot
-              ;;
-            [Nn])
-              echo "已取消"
-              ;;
-            *)
-              echo "无效的选择，请输入 Y 或 N。"
-              ;;
-          esac
-              ;;
-
-          7)
-              clear
-              curl -L https://gitlab.com/spiritysdx/Oracle-server-keep-alive-script/-/raw/main/oalive.sh -o oalive.sh && chmod +x oalive.sh && bash oalive.sh
-              ;;              
           0)
               main_menu
 
@@ -5726,7 +5678,6 @@ EOF
 
     done
     ;;
-
 
   15)
     while true; do
