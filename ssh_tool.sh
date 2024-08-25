@@ -5152,7 +5152,7 @@ EOF
 
         12)
         clear
-            install whet && wget -O snell.sh --no-check-certificate https://git.io/Snell.sh && chmod +x snell.sh && ./snell.sh
+            install wget && wget -O snell.sh --no-check-certificate https://git.io/Snell.sh && chmod +x snell.sh && ./snell.sh
             break_end
         ;;
 
