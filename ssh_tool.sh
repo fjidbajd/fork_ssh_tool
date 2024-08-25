@@ -3320,10 +3320,25 @@ case $choice in
       case $sub_choice in
           1)
               clear
-              read -p $'\033[1;91m请输入你的快捷按键: \033[0m' kuaijiejian
-              echo "alias $kuaijiejian='./ssh_tool.sh'" >> ~/.bashrc
-              source ~/.bashrc
-              echo "快捷键已设置"
+              read -p $'\033[1;91m请输入你的快捷按键: \033[0m' kuaijiejian              
+                [ -z "$kuaijiejian" ] && echo -e "${red}你似乎什么也没输入${re}" && main_menu || kuaijiejian_value="$kuaijiejian"
+    
+                # 将 $kuaijiejian 转换为大写和小写
+                uppercase_value=$(echo "$kuaijiejian_value" | tr '[:lower:]' '[:upper:]')
+                lowercase_value=$(echo "$kuaijiejian_value" | tr '[:upper:]' '[:lower:]')
+
+                # 判断 $kuaijiejian 的值是大写还是小写
+                if [[ "$kuaijiejian_value" == "$uppercase_value" ]]; then
+                    sed -i "s/alias K=/alias $kuaijiejian_value=/g" ~/.bashrc ~/.profile ~/.bash_profile
+                    sed -i "s/alias k=/alias $lowercase_value=/g" ~/.bashrc ~/.profile ~/.bash_profile
+                elif [[ "$kuaijiejian_value" == "$lowercase_value" ]]; then
+                    sed -i "s/alias k=/alias $kuaijiejian_value=/g" ~/.bashrc ~/.profile ~/.bash_profile
+                    sed -i "s/alias K=/alias $uppercase_value=/g" ~/.bashrc ~/.profile ~/.bash_profile
+                else
+                    echo -e "${red}请输入大写或小写字母${re}"
+                fi
+                source ~/.bashrc && source ~/.profile && source ~/.bash_profile
+                echo -e "${green}快捷键已设置${re}"
               ;;
 
           2)
@@ -4344,7 +4359,8 @@ EOF
               echo "------------------------"
               echo "3. 备份当前更新源"
               echo "4. 还原初始更新源"
-              echo -e "${green}5. 软件源切换列表(推荐)${re}"
+              echo -e "${green}5. 国内软件源切换列表(推荐)${re}"
+              echo -e "${green}6. 国内软件源切换列表(推荐)${re}"
               echo "------------------------"
               echo "0. 返回上一级"
               echo "------------------------"
@@ -4415,7 +4431,12 @@ EOF
                       clear
                       bash <(curl -sSL https://raw.githubusercontent.com/SuperManito/LinuxMirrors/main/ChangeMirrors.sh)
                       break_end
-                      ;;                     
+                      ;;     
+                  6)
+                      clear
+                      bash <(curl -sSL https://linuxmirrors.cn/main.sh) --abroad
+                      break_end
+                      ;;                 
                   0)
                       break
                       ;;
@@ -4975,17 +4996,17 @@ EOF
       echo -e "${green}---------------------------------------------------------${re}"
       echo -e "${green}       Sing-box多合一             Argo-tunnel${re}"
       echo -e "${green}---------------------------------------------------------${re}"
-      echo -e "${white} 1. F佬Sing-box一键脚本        5. F佬ArgoX一键脚本${re}"
-      echo -e "${white} 2. 老王Sing-box四合一         6. Suoha一键Argo脚本${re}"
-      echo -e "${white} 3. 勇哥Sing-box四合一         7. WL一键Argo哪吒脚本${re}"
-      echo -e "${white} 4. 233boy.sing-box一键脚本    8. 老王nodejs-argo节点+哪吒+订阅"
+      echo -e "${white} 1. F佬Sing-box一键脚本        5. 老王xray-2go一键脚本${re}"
+      echo -e "${white} 2. 老王Sing-box四合一         6. F佬ArgoX一键脚本${re}"
+      echo -e "${white} 3. 勇哥Sing-box四合一         7. Suoha一键Argo脚本${re}"
+      echo -e "${white} 4. 233boy.sing-box一键脚本    8. WL一键Argo哪吒脚本"
       echo -e "${yellow}---------------------------------------------------------${re}"
       echo -e "${yellow}        单协议                    XRAY面板及其他${re}"
       echo -e "${yellow}---------------------------------------------------------${re}"
       echo -e "${white} 9. 老王Hysteria2一键脚本     13.新版X-UI面板一键脚本${re}"
       echo -e "${white}10. 老王Juicity一键脚本       14.伊朗版3X-UI面板一键脚本${re}"
       echo -e "${white}11. 老王Tuic-v5一键脚本       15.OpenVPN一键安装脚本 ${re}"
-      echo -e "${white}12. Brutal-Reality一键脚本    16.一键搭建TG代理 ${re}"
+      echo -e "${white}12. Snell一键安装脚本         16.一键搭建TG代理 ${re}"
       echo -e "${white}17. 老王Reality一键脚本       18.sing-box面板(sui) ▶${re}"
       echo "---------------------------------------------------------" 
       echo -e "${skyblue} 0. 返回主菜单${re}"
@@ -5017,82 +5038,23 @@ EOF
         ;;
         5)
         clear
-            bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh)
-            break_end
+            bash <(curl -Ls https://github.com/eooce/xray-2go/raw/main/xray_2go.sh)
+            break_end 
         ;;
         6)
         clear
-            curl https://www.baipiao.eu.org/suoha.sh -o suoha.sh && bash suoha.sh
-            break_end            
+            bash <(wget -qO- https://raw.githubusercontent.com/fscarmen/argox/main/argox.sh)
+            break_end         
         ;;            
         7)
         clear
-            bash <(curl -sL https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/install.sh)
-            break_end            
+            bash <(curl -Ls https://www.baipiao.eu.org/suoha.sh)
+            break_end             
         ;; 
         8)
         clear
-            # 检查系统中是否安装screen
-            install screen
-
-            # 检查系统中是否存在nodejs
-            install_nodejs
-            sleep 1
-            clear
-            # 提示输入订阅端口
-            echo -e "${yellow}注意：NAT小鸡需输入指定端口范围内的端口，否则无法使用订阅功能${re}"
-            
-            while true; do
-                read -p $'\033[1;35m请输入节点订阅端口[回车将使用随机端口]: \033[0m' port
-                # 如果端口号为空，则生成随机端口号
-                if [[ -z $port ]]; then 
-                    port=$(shuf -i 2000-65000 -n 1)
-                    break
-                else
-                    # 如果端口号不为空，则验证是否为小于65535的正整数
-                    if [[ $port =~ ^[0-9]+$ ]]; then
-                        # 检查输入是否为小于65535的正整数
-                        if [ "$port" -gt 0 ] && [ "$port" -lt 65535 ] 2>/dev/null; then
-                            # 输入有效，跳出循环
-                            break
-                        else
-                            echo -e "${red}端口输入错误，端口应为小于65535的正整数${re}"
-                        fi
-                    else
-                        echo -e "${red}端口输入错误，端口应为数字且为正整数${re}"
-                    fi
-                fi
-            done
-            # 开放订阅端口
-            echo -e "${yellow}正在开放端口中...${re}"
-            install iptables
-            iptables -A INPUT -p tcp --dport $port -j ACCEPT
-            echo -e "${green}${port}端口已开放${re}"
-            clear
-            ipv4=$(curl -s ipv4.ip.sb)
-
-            echo -e "${green}你的节点订阅链接为：http://$ipv4:$port/sub${re}" 
-
-            # 判断是否要安装哪吒
-            read -p $'\033[1;33m是否需要一起安装哪吒探针？(y/n): \033[0m' nezha
-
-            if [ "$nezha" == "y" ] || [ "$nezha" == "Y" ]; then
-
-                # 提示输入哪吒域名
-                read -p $'\033[1;35m请输入哪吒客户端的域名: \033[0m' nezha_server
-
-                # 提示输入哪吒端口
-                read -p $'\033[1;35m请输入哪吒端口: \033[0m' nezha_port 
-
-                # 提示输入哪吒密钥
-                read -p $'\033[1;35m请输入哪吒客户端密钥: \033[0m' nezha_key
-                [ -d "node" ] || mkdir -p "node" && cd "node"
-                curl -O https://raw.githubusercontent.com/eooce/ssh_tool/main/index.js && curl -O https://raw.githubusercontent.com/eooce/nodejs-argo/main/package.json && npm install && chmod +x index.js && PORT=$port NEZHA_SERVER=$nezha_server NEZHA_PORT=$nezha_port NEZHA_KEY=$nezha_key CFIP=na.ma CFPORT=8443 screen node index.js
-            
-            else
-
-                curl -O https://raw.githubusercontent.com/eooce/ssh_tool/main/index.js && curl -O https://raw.githubusercontent.com/eooce/nodejs-argo/main/package.json && npm install && chmod +x index.js && PORT=$port CFIP=na.ma CFPORT=8443 screen node index.js
-            fi
+            bash <(curl -sL https://raw.githubusercontent.com/dsadsadsss/vps-argo/main/install.sh)
+            break_end             
         ;;
         9)
         while true; do
@@ -5190,26 +5152,7 @@ EOF
 
         12)
         clear
-            echo ""
-            echo -e "${purple}安装Tcp-Brutal-Reality需要内核高于5.8，不符合请手动升级5.8内核以上再安装${re}" 
-
-            current_kernel_version=$(uname -r | cut -d'-' -f1 | awk -F'.' '{print $1 * 100 + $2}')
-            target_kernel_version=508
-
-            # 比较内核版本
-            if [ "$current_kernel_version" -lt "$target_kernel_version" ]; then
-                echo -e "${red}当前系统内核版本小于 $target_kernel_version，请手动升级内核后重试，正在退出...${re}"
-                sleep 2 
-                main_menu
-            else
-                echo ""
-                echo -e "${green}当前系统内核版本 $current_kernel_version，符合安装要求${re}"
-                sleep 1
-                bash <(curl -fsSL https://github.com/vveg26/sing-box-reality-hysteria2/raw/main/tcp-brutal-reality.sh)
-                sleep 1
-                break_end
-            fi
-
+            install whet && wget -O snell.sh --no-check-certificate https://git.io/Snell.sh && chmod +x snell.sh && ./snell.sh
         ;;
 
         13)
