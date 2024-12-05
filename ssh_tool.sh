@@ -5027,7 +5027,7 @@ EOF
         ;;
         3)
         clear
-            bash <(curl -Ls https://gitlab.com/rwkgyg/sing-box-yg/raw/main/sb.sh)
+            bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/sing-box-yg/main/sb.sh)
             break_end
         ;;
         4)
