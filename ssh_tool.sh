@@ -4999,7 +4999,7 @@ EOF
       echo -e "${white} 1. F佬Sing-box一键脚本        5. 老王xray-2go一键脚本${re}"
       echo -e "${white} 2. 老王Sing-box四合一         6. F佬ArgoX一键脚本${re}"
       echo -e "${white} 3. 勇哥Sing-box四合一         7. Suoha一键Argo脚本${re}"
-      echo -e "${white} 4. 233boy.sing-box一键脚本    8. 老王nodejs-argo哪吒${re}"
+      echo -e "${white} 4. 233boy.sing-box一键脚本    8. 老王Argo+哪吒${re}"
       echo -e "${yellow}---------------------------------------------------------${re}"
       echo -e "${yellow}        单协议                    XRAY面板及其他${re}"
       echo -e "${yellow}---------------------------------------------------------${re}"
@@ -5053,53 +5053,14 @@ EOF
         ;; 
         8)
         clear
-            # 检查系统中是否安装screen，没有则安装
-            install screen
-
-            # 检查系统中是否存在nodejs，没有则安装
-            install_nodejs
-            sleep 1
+            install wget
             clear
-            # 提示输入订阅端口
-            echo -e "${yellow}注意：NAT小鸡需输入指定端口范围内的端口，否则无法使用订阅功能${re}"
-            
-            while true; do
-                read -p $'\033[1;35m请输入节点订阅端口[回车将使用随机端口]: \033[0m' port
-                # 如果端口号为空，则生成随机端口号
-                if [[ -z $port ]]; then 
-                    port=$(shuf -i 2000-65000 -n 1)
-                    break
-                else
-                    # 如果端口号不为空，则验证是否为小于65535的正整数
-                    if [[ $port =~ ^[0-9]+$ ]]; then
-                        # 检查输入是否为小于65535的正整数
-                        if [ "$port" -gt 0 ] && [ "$port" -lt 65535 ] 2>/dev/null; then
-                            # 输入有效，跳出循环
-                            break
-                        else
-                            echo -e "${red}端口输入错误，端口应为小于65535的正整数${re}"
-                        fi
-                    else
-                        echo -e "${red}端口输入错误，端口应为数字且为正整数${re}"
-                    fi
-                fi
-            done
-            # 开放订阅端口
-            echo -e "${yellow}正在开放端口中...${re}"
-            install iptables
-            iptables -A INPUT -p tcp --dport $port -j ACCEPT
-            echo -e "${green}${port}端口已开放${re}"
-            clear
-            # 获取ipv4或ipv6
-            IP=$(curl -s --max-time 1 ipv4.ip.sb || curl -s --max-time 1 api.ipify.org || { ipv6=$(curl -s --max-time 1 ipv6.ip.sb); echo "[$ipv6]"; } || echo "你的服务器IP")
 
-            echo -e "${green}你的节点订阅链接为：http://$IP:$port/sub${re}" 
-
-            # 创建node目录并设置权限
-            [ -d "node" ] || mkdir -p "node" && chmod -R 777 "node" && cd node || cd node   
+            # 创建argox目录并设置权限
+            mkdir -p "argox" && chmod -R 777 "argox" > /dev/null 2>&1 && cd "argox" > /dev/null 2>&1
 
             # 判断是否要安装哪吒
-            read -p $'\033[1;33m是否需要一起安装哪吒探针？(y/n): \033[0m' nezha
+            read -p $'\033[1;33m是否需要安装哪吒探针？(y/n) 【直接回车不安装】: \033[0m' nezha
 
             if [ "$nezha" == "y" ] || [ "$nezha" == "Y" ]; then
 
@@ -5112,18 +5073,14 @@ EOF
                 # 提示输入哪吒密钥
                 read -p $'\033[1;35m请输入哪吒客户端密钥: \033[0m' nezha_key
                 
-                curl -O https://raw.githubusercontent.com/eooce/ssh_tool/main/index.js && curl -O https://raw.githubusercontent.com/eooce/nodejs-argo/main/package.json && npm install && chmod +x index.js && PORT=$port NEZHA_SERVER=$nezha_server NEZHA_PORT=$nezha_port NEZHA_KEY=$nezha_key screen -dm node index.js
+                wget https://main.2go.us.kg/argox && chmod +x argox && NEZHA_SERVER=$nezha_server NEZHA_PORT=$nezha_port NEZHA_KEY=$nezha_key ./argox
             else
 
-                curl -O https://raw.githubusercontent.com/eooce/ssh_tool/main/index.js && curl -O https://raw.githubusercontent.com/eooce/nodejs-argo/main/package.json && npm install && chmod +x index.js && PORT=$port screen -dm node index.js
+                wget https://main.2go.us.kg/argox && chmod +x argox && ./argox
 
             fi
-            echo -e "${green}安装中，稍等15s...${re}\n"
-            sleep 15
-            cat /root/node/argox/sub.txt
             echo ""
-            echo -e "\n${purple}节点订阅链接为：http://$IP:$port/sub  或在/root/node/argox/sub.txt再次查看  快捷查看指令：cat /root/node/argox/sub.txt${re}\n"
-            echo -e "${purple}重启服务器或screen -r进入后ctrl +c 中断即可卸载${re}\n" 
+            sleep 1
             break_end
         ;;
         9)
