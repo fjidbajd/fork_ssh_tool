@@ -5541,11 +5541,7 @@ EOF
                     iptables -A INPUT -p tcp --dport 9527 -j ACCEPT
                     mkdir -p rtbot && cd rtbot
                     # 下载、解压、设置权限并后台运行 sh_client_bot.sh
-                    wget -O gz_client_bot.tar.gz https://github.com/semicons/java_oci_manage/releases/latest/download/gz_client_bot.tar.gz
-                    tar -zxvf gz_client_bot.tar.gz --exclude=client_config
-                    tar -zxvf gz_client_bot.tar.gz --skip-old-files client_config
-                    chmod +x sh_client_bot.sh client_config
-                    bash sh_client_bot.sh &
+                    wget -O sh_client_bot.sh https://github.com/semicons/java_oci_manage/releases/latest/download/sh_client_bot.sh && chmod +x sh_client_bot.sh && bash sh_client_bot.sh
                     clear 
 
                     while true; do
