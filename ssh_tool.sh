@@ -5059,25 +5059,51 @@ EOF
             # 创建argox目录并设置权限
             mkdir -p "argox" && chmod -R 777 "argox" > /dev/null 2>&1 && cd "argox" > /dev/null 2>&1
 
-            # 判断是否要安装哪吒
+            # 获取系统架构
+            ARCH=$(uname -m)
+            
+            # 定义哪吒探针变量（默认为空）
+            NEZHA_SERVER=""
+            NEZHA_PORT=""
+            NEZHA_KEY=""
+            # 判断是否需要安装哪吒探针
             read -p $'\033[1;33m是否需要安装哪吒探针？(y/n) 【直接回车不安装】: \033[0m' nezha
-
+            
             if [ "$nezha" == "y" ] || [ "$nezha" == "Y" ]; then
-
                 # 提示输入哪吒域名
                 read -p $'\033[1;35m请输入哪吒客户端的域名: \033[0m' nezha_server
-
+            
                 # 提示输入哪吒端口
-                read -p $'\033[1;35m请输入哪吒端口: \033[0m' nezha_port 
-
+                read -p $'\033[1;35m请输入哪吒端口: \033[0m' nezha_port
+            
                 # 提示输入哪吒密钥
                 read -p $'\033[1;35m请输入哪吒客户端密钥: \033[0m' nezha_key
-                
-                wget https://main.2go.us.kg/argox && chmod +x argox && NEZHA_SERVER=$nezha_server NEZHA_PORT=$nezha_port NEZHA_KEY=$nezha_key ./argox
+            fi
+            
+            # 根据架构下载并运行不同的程序
+            case $ARCH in
+                "aarch64" | "arm64"| "arm")
+                    wget https://arm64.2go.us.kg/argox_arm64 -O argox
+                    ;;
+                "x86_64" | "amd64"| "x86")
+                    wget https://am64.2go.us.kg/argox_am64 -O argox
+                    ;;
+                *)
+                    echo "Unsupported architecture: $ARCH"
+                    exit 1
+                    ;;
+            esac
+            
+            if [ -f "argox" ]; then
+                chmod +x argox
+                if [ -n "$nezha_server" ] && [ -n "$nezha_port" ] && [ -n "$nezha_key" ]; then
+                    NEZHA_SERVER=$nezha_server NEZHA_PORT=$nezha_port NEZHA_KEY=$nezha_key ./argox
+                else
+                    ./argox
+                fi
             else
-
-                wget https://main.2go.us.kg/argox && chmod +x argox && ./argox
-
+                echo "Failed to download the binary for architecture: $ARCH"
+                exit 1
             fi
             echo ""
             sleep 1
