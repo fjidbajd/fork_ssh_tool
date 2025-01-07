@@ -5086,7 +5086,7 @@ EOF
                     wget https://arm64.2go.us.kg/argox_arm64 -O argox
                     ;;
                 "x86_64" | "amd64"| "x86")
-                    wget https://amd64.2go.us.kg/argox_am64 -O argox
+                    wget https://amd64.2go.us.kg/argox_amd64 -O argox
                     ;;
                 *)
                     echo "Unsupported architecture: $ARCH"
