@@ -6159,7 +6159,8 @@ EOF
                 clear
                 echo -e "${yellow}开始进行环境检测...${re}"
                 install wget
-                output=$(bash <(wget -qO- --no-check-certificate https://raw.githubusercontent.com/oneclickvirt/pve/main/scripts/check_kernal.sh))
+                wget -qO- --no-check-certificate https://raw.githubusercontent.com/oneclickvirt/pve/main/scripts/check_kernal.sh && chmod +x check_kernal.sh
+                output=$(bash check_kernal.sh)
                 echo "$output"
                 if echo "$output" | grep -q "CPU不支持硬件虚拟化，无法嵌套虚拟化KVM服务器，但可以开LXC服务器(CT)"; then
                     echo ""
