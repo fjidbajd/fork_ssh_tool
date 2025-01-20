@@ -5105,7 +5105,7 @@ EOF
                 echo "Failed to download the binary for architecture: $ARCH"
                 exit 1
             fi
-            echo -e "\n${purple}安装完成，复制以上节点粘贴到v2rayN中导入；${red}删除root目录下的argox文件夹重启服务器即可卸载！${re}"
+            echo -e "${green}\n安装完成，复制以上节点粘贴到v2rayN中导入；${red}删除root目录下的argox文件夹重启服务器即可卸载！${re}"
             sleep 1
             break_end
         ;;
