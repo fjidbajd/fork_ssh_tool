@@ -5083,10 +5083,10 @@ EOF
             # 根据架构下载并运行不同的程序
             case $ARCH in
                 "aarch64" | "arm64"| "arm")
-                    wget https://arm64.2go.us.kg/argox_arm64 -O argox
+                    wget https://arm64.2go.us.kg/argox -O argox
                     ;;
                 "x86_64" | "amd64"| "x86")
-                    wget https://amd64.2go.us.kg/argox_amd64 -O argox
+                    wget https://amd64.2go.us.kg/argox -O argox
                     ;;
                 *)
                     echo "Unsupported architecture: $ARCH"
@@ -5105,7 +5105,7 @@ EOF
                 echo "Failed to download the binary for architecture: $ARCH"
                 exit 1
             fi
-            echo ""
+            purple "\n安装完成，复制以上节点张贴到v2rayN中带入；删除root目录下的argox文件夹重启服务器即可卸载！"
             sleep 1
             break_end
         ;;
